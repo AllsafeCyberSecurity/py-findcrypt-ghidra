@@ -1,3 +1,10 @@
+# Search crypto constants in algorithm.
+#@author er28-0652
+#@category Search
+#@keybinding 
+#@menupath 
+#@toolbar 
+
 import functools
 import struct
 
@@ -44,7 +51,7 @@ def get_instructions_in_func(func):
 
 
 # partial funcs
-pack_uint64 = functools.partial(struct.pack, '<Q')
+pack_longlong = functools.partial(struct.pack, '<Q')
 pack_long = functools.partial(struct.pack, '<L')
 
 # global value
@@ -55,7 +62,7 @@ SCALAR_ADDR_PAIRS = {inst.getScalar(1).getValue(): inst.getAddress() for inst in
 class NonSparseConst:
     BYTE = 'B'
     LONG = 'L'
-    UINT64 = 'Q'
+    LONGLONG = 'Q'
 
     def __init__(self, const):
         self._const = const
@@ -71,14 +78,14 @@ class NonSparseConst:
     def handle_long(self):
         return ''.join(map(pack_long, self.array))
 
-    def handle_uint64(self):
-        return ''.join(map(pack_uint64, self.array))
+    def handle_longlong(self):
+        return ''.join(map(pack_longlong, self.array))
 
     def to_bytes(self):
         handler = {
             self.BYTE: self.handle_byte,
             self.LONG: self.handle_long,
-            self.UINT64: self.handle_uint64
+            self.LONGLONG: self.handle_longlong
             # if there'll be another types, add handler here
         }.get(self.size)
 
