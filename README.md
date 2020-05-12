@@ -26,3 +26,4 @@ findcrypt.py> Finished!
 ## Known issues
 
  - can't find consts in 64bit binary
+ - maybe doesn't work for sparse consts in non-function
