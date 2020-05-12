@@ -143,7 +143,7 @@ def find_crypt_sparse_consts():
 
             # get all scalars in same function
             insts_with_scalars = filter(has_scalar_operand, insts)
-            scalars = map(lambda x: x.getScalar(1).getValue(), insts_with_scalars)
+            scalars = [inst.getScalar(1).getValue() for inst in insts_with_scalars]
 
             # check all values in consts array are contained in scalars in same function 
             if all([c in scalars for c in sc.array]):
