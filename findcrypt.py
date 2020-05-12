@@ -99,10 +99,6 @@ class NonSparseConst:
         if self._byte_array is None:
             self._byte_array = self.to_bytes()
         return self._byte_array
-    
-    @property
-    def label_name(self):
-        return '{alg}_{name}'.format(alg=self.algorithm, name=self.name)
 
 
 class SparseConst:
@@ -111,10 +107,7 @@ class SparseConst:
         self.algorithm = const['algorithm']
         self.name = const['name']
         self.array = const['array']
-    
-    @property
-    def label_name(self):
-        return '{alg}_{name}'.format(alg=self.algorithm, name=self.name)
+
 
 class OperandConst:
     def __init__(self, const):
@@ -122,10 +115,6 @@ class OperandConst:
         self.algorithm = const['algorithm']
         self.name = const['name']
         self.value = const['value']
-    
-    @property
-    def label_name(self):
-        return '{alg}_{name}'.format(alg=self.algorithm, name=self.name)
 
 
 def find_crypt_non_sparse_consts():
@@ -133,8 +122,8 @@ def find_crypt_non_sparse_consts():
     for nsc in map(NonSparseConst, const.non_sparse_consts):
         found = find(nsc.byte_array)
         if found:
-            print(' [+] find {name} at {addr}'.format(name=nsc.label_name, addr=found))
-            create_label(found, nsc.label_name)
+            print(' [+] find {name} for {alg} at {addr}'.format(name=nsc.name, alg=nsc.algorithm, addr=found))
+            create_label(found, nsc.name)
 
 def find_crypt_sparse_consts():
     print('[*] processing sparse consts')
@@ -156,16 +145,16 @@ def find_crypt_sparse_consts():
             if all([c in scalars for c in sc.array]):
                 # if all consts are contained
                 # add comment at the first found const's address
-                print(' [+] find {name} at {addr}'.format(name=sc.label_name, addr=found_addr))
-                create_label(found_addr, sc.label_name)
+                print(' [+] find {name} for {alg} at {addr}'.format(name=sc.name, alg=sc.algorithm, addr=found_addr))
+                create_label(found_addr, sc.name)
 
 def find_crypt_operand_consts():
     print('[*] processing operand consts')
     for oc in map(OperandConst, const.operand_consts):
         found_addr = SCALAR_ADDR_PAIRS.get(oc.value)
         if found_addr:
-            print(' [+] find {name} at {addr}'.format(name=oc.label_name, addr=found_addr))
-            set_eol_comment(found_addr, oc.label_name)
+            print(' [+] find {name} for {alg} at {addr}'.format(name=oc.name, alg=oc.algorithm, addr=found_addr))
+            set_eol_comment(found_addr, oc.name)
 
 def main():
     find_crypt_non_sparse_consts()
