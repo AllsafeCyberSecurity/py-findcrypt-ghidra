@@ -137,7 +137,7 @@ def find_crypt_sparse_consts():
         found_addr = SCALAR_ADDR_PAIRS.get(sc.array[0])
         if found_addr:
             # check the rest of consts, maybe it should be in the same function
-            # it is noted that it will be failed if the constants is not used in function (like shellcode).
+            # it is noted that it will be failed if the constants are not used in function (like shellcode).
             maybe_crypto_func = get_function_containing(found_addr)
             insts = get_instructions_in_func(maybe_crypto_func)
 
@@ -147,7 +147,8 @@ def find_crypt_sparse_consts():
 
             # check all values in consts array are contained in scalars in same function 
             if all([c in scalars for c in sc.array]):
-                # if all consts are contained...
+                # if all consts are contained
+                # add comment at the first found const's address
                 print(' [+] find {name} at {addr}'.format(name=sc.label_name, addr=found_addr))
                 create_label(found_addr, sc.label_name)
 
