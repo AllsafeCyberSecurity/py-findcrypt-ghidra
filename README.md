@@ -14,11 +14,11 @@ Run `findcrypt.py` after installation. once successfully done, this script will 
 ```bash
 findcrypt.py> Running...
 [*] processing non-sparse consts
- [+] find CRC32_CRC32_m_tab_le at 4b2992d0
- [+] find SHA256_SHA256_K at 4b28d9e0
+ [+] find CRC32_m_tab_le for CRC32 at 4b2992d0
+ [+] find SHA256_K for SHA256 at 4b28d9e0
 [*] processing sparse consts
- [+] find SHA256_SHA256_H at 4b2edb20
- [+] find MD5_MD5_initstate at 4b37a610
+ [+] find SHA256_H for SHA256 at 4b2edb20
+ [+] find MD5_initstate for MD5 at 4b37a610
 [*] processing operand consts
 findcrypt.py> Finished!
 ```
