@@ -2281,6 +2281,9 @@ operand_consts = [
     {"algorithm": "xxHash64",
      "name": "xxHash64_PRIME64_5(low-order)",
      "value": 0x165667C5},
+    {"algorithm": "crc32",
+     "name": "Dynamic CRC32 table creation",
+     "value": 0xEDB88320}
 ]
 
 def main():
