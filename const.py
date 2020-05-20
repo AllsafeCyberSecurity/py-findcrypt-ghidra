@@ -2281,8 +2281,8 @@ operand_consts = [
     {"algorithm": "xxHash64",
      "name": "xxHash64_PRIME64_5(low-order)",
      "value": 0x165667C5},
-    {"algorithm": "crc32",
-     "name": "Dynamic CRC32 table creation",
+    {"algorithm": "CRC32",
+     "name": "CRC32_Bit_Reverse_Polynominal",
      "value": 0xEDB88320}
 ]
 
